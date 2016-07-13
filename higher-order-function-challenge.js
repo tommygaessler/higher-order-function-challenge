@@ -8,23 +8,27 @@ console.log("Question 1");
 
 function any(num, callback)
 {
+  var isTrue = false;
   for (var i = 0; i < num.length; i++)
   {
-    if (num[i] > 10)
+    isTrue = callback(num[i])
+    if(isTrue === true)
     {
-      return greaterThan10();
+      return true;
     }
   }
   return false;
 }
 
-var greaterThan10 = function()
+function greaterThan10(anything)
 {
-  return true;
+  if (anything > 10)
+  {
+    return true;
+  }
 }
 
 console.log(any([ 8, 9, 10, 11 ], greaterThan10));
-
 // surprise()()
 // 'surprise!'
 // Return a function
@@ -52,26 +56,26 @@ function filter(findOdd, callback2)
   var odds = [];
   for (var i = 0; i < findOdd.length; i++)
   {
-    if (findOdd[i] % 2 !== 0)
+    if(callback2(findOdd[i]) != undefined)
     {
-      var odd = findOdd[i];
-      odds.push(odd);
-
-      // return onlyOdd;
-      // wtf is onlyOdd for, and how do I use it
+      odds.push(findOdd[i]);
     }
   }
   return odds;
 }
 
-// var onlyOdd = function()
-// {
-//   return odds;
-// }
+function onlyOdd(checkOdd)
+{
+  if (checkOdd % 2 !== 0)
+  {
+    return checkOdd;
+  }
+  else {
+    return;
+  }
+}
 
-console.log(filter([ 1, 2, 3, 4 ]));
-// supposed to be
-// console.log(filter([ 1, 2, 3, 4 ], onlyOdd));
+console.log(filter([ 1, 2, 3, 4 ], onlyOdd));
 
 // sumTwoNumbers(3)(9)
 // 12
